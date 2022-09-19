@@ -8,7 +8,7 @@ import axios from 'axios';
 toast.configure();
 const RegMemForm = () => {
   const[checked, isRegFee] = useState('Not Paid');
-  const[cincFile , setCnicFile] = useState('');
+  const[cincFile , setCnicFile] = useState(null);
   const [token, seToken] = useState('');
   const[userID , setUserID] = useState();
   const[btnPress , setBtnPress] = useState(false);
@@ -171,9 +171,14 @@ const RegMemForm = () => {
                     <label className="form-label" htmlFor="time"> <b>Address*</b> </label>
                     <input type="text" className={inputs.memAddress ==='' && btnPress === true ?"form-control credit-card-mask btn-outline-danger" :"form-control time-mask"} name="memAddress" value={inputs.memAddress} onChange={inputHandler} placeholder="Enter Address" id="time" />
                   </div>
-                  <div className="col-xl-4 col-md-6 col-sm-12 mb-2">
+                  <div className="col-xl-4 col-md-6 col-sm-12 ">
                     <label className="form-label" htmlFor="numeral-formatting"> <b>Upload CNIC*</b></label>
-                    <input type="file" className={cincFile ==='' && btnPress === true ?"form-control numeral-mask btn-outline-danger":"form-control numeral-mask" } placeholder="XXXXX-XXXXXXX-X"  id="numeral-formatting" onChange={(e)=> setCnicFile(e.target.files[0])} />
+                    <input type="file" className={cincFile ==='' && btnPress === true ?"form-control numeral-mask btn-outline-danger":"form-control numeral-mask" } placeholder="XXXXX-XXXXXXX-X"  id="numeral-formatting" onChange={(e)=> setCnicFile(URL.createObjectURL(e.target.files[0]))} />
+                    {/* style={{width:"20em",height:"5em"}} */}
+                    {
+                      cincFile === null ? null :
+                      <img src={cincFile} className="w-100 h-50 mt-1 rounded"  alt="preview_image" />
+                    }
                   </div>
                   <div className="col-xl-4 col-md-6 col-sm-12 mb-2">
                     <label className="form-label" htmlFor="blocks"> <b>CNIC*</b></label>

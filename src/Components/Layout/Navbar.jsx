@@ -46,7 +46,7 @@ const Navbar = () => {
   
   return (
     <>
-        <nav className="header-navbar navbar navbar-expand-lg align-items-center floating-nav navbar-light navbar-shadow container-xxl">
+     <nav className="header-navbar navbar navbar-expand-lg align-items-center floating-nav navbar-light navbar-shadow container-xxl">
     <div className="navbar-container d-flex content">
       <div className="bookmark-wrapper d-flex align-items-center">
         {/* <h3 style={{fontSize:"18px", fontFamily:"Montserrat"}}>My Profile</h3> */}
