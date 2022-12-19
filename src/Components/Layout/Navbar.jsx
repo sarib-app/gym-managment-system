@@ -46,7 +46,7 @@ const Navbar = () => {
   
   return (
     <>
-     <nav className="header-navbar navbar navbar-expand-lg align-items-center floating-nav navbar-light navbar-shadow container-xxl">
+<nav className="header-navbar navbar navbar-expand-lg align-items-center floating-nav navbar-light navbar-shadow container-xxl">
     <div className="navbar-container d-flex content">
       <div className="bookmark-wrapper d-flex align-items-center">
         {/* <h3 style={{fontSize:"18px", fontFamily:"Montserrat"}}>My Profile</h3> */}
@@ -91,7 +91,6 @@ const Navbar = () => {
                 <div className="badge rounded-pill badge-light-primary">4 Items</div>
               </div>
             </li>
-
             <li className="scrollable-container media-list">
               <div className="list-item align-items-center"><img className="d-block rounded me-1" src="../../../app-assets/images/pages/eCommerce/1.png" alt="donuts" width={62} />
                 <div className="list-item-body flex-grow-1"><i className="ficon cart-item-remove" data-feather="x" />
@@ -355,6 +354,8 @@ const Navbar = () => {
         <div className="d-flex justify-content-start"><span className="me-75" data-feather="alert-circle" /><span>No results found.</span></div>
       </a></li>
   </ul>
+
+
 
 
 

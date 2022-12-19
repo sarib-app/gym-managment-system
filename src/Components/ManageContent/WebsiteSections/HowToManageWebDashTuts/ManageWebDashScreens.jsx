@@ -1,5 +1,4 @@
 import React from 'react';
-import Global from '../../../Layout/Images/globe.svg'
 import {Link} from 'react-router-dom';
 
 const ManageWebDashScreens = () => {

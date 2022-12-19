@@ -1,9 +1,8 @@
 import HomePricing from '../../../WebImages/HomePricing.JPG';
+import {useLocation , Link} from 'react-router-dom';
 import { EncryptStorage } from 'encrypt-storage';
 import React,{useState,useEffect} from 'react';
 import "react-toastify/dist/ReactToastify.css";
-import {useLocation , Link} from 'react-router-dom';
-import baseURL from '../../../BaseUrl.js';
 import { toast } from "react-toastify";
 import axios from 'axios';
 
@@ -66,14 +65,7 @@ const HomePricingSec = () => {
       return null;
     }
   }
-  
-  
-  
 
-  
-  
-  
-  
   const homePricingSection = ()=>{
     if(normalFee && normalTxtOne && normalTxtTwo && proFee && proTxtOne && proTxtTwo && advFee && advTxtOne && advTxtTwo)
     {
@@ -92,7 +84,7 @@ const HomePricingSec = () => {
         adv_txt_two:advTxtTwo
       }
     
-      axios.post(`${baseURL}api/updatepricing/${userID}`,homeObj)
+      axios.post(`${process.env.REACT_APP_BASE_URL}api/updatepricing/${userID}`,homeObj)
       .then((res)=>{
         console.log(res)
         setLoading(false)
@@ -100,7 +92,7 @@ const HomePricingSec = () => {
         
       })
       .catch((error)=>{
-        console.log(error)
+        return error
       })
 
     }

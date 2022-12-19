@@ -1,9 +1,8 @@
-import { EncryptStorage } from 'encrypt-storage';
 import GallerySection from '../../../WebImages/GallerySection.JPG'
+import {useLocation,Link} from 'react-router-dom';
+import { EncryptStorage } from 'encrypt-storage';
 import "react-toastify/dist/ReactToastify.css";
 import React,{useState,useEffect} from 'react';
-import {useLocation,Link} from 'react-router-dom';
-import baseURL from '../../../BaseUrl.js';
 import { toast } from "react-toastify";
 import axios from 'axios';
 
@@ -123,15 +122,14 @@ const GalleryForm = () => {
 
 
 
-axios.post(`${baseURL}api/updateimages/${userID}`,formdata)
+axios.post(`${process.env.REACT_APP_BASE_URL}api/updateimages/${userID}`,formdata)
 .then(res =>{
         setLoading(false)
         toast.info('Gallery Section Updated')
-        console.log(res)
         
     })
     .catch((err)=>{
-        console.log(err)
+      return err
     })
     }
     else{

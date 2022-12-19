@@ -168,12 +168,12 @@
 .vertical-layout.vertical-menu-modern .toggle-icon:focus,
 .vertical-layout.vertical-menu-modern .collapse-toggle-icon:focus {
   outline: none; }
-
-@media (min-width: 992px) {
+/* 992px */
+@media (min-width:992px ) {
   .vertical-layout.vertical-menu-modern .main-menu {
     width: 260px; } }
-
-@media (max-width: 1199.98px) {
+/* 1199.98px */
+@media (max-width:768px ) {
   .vertical-layout.vertical-menu-modern .main-menu {
     width: 0; }
   .vertical-layout.vertical-menu-modern .navbar .navbar-header {

@@ -3,7 +3,6 @@ import "react-toastify/dist/ReactToastify.css";
 import React,{useState,useEffect} from 'react';
 import { toast } from "react-toastify";
 import {Link} from 'react-router-dom';
-import baseURL from '../BaseUrl.js';
 import axios from 'axios';
 
 
@@ -16,13 +15,17 @@ const DuesTable = () => {
   const currentYear = new Date().getFullYear();
   const [month,setMonth]=useState(Month);
   const [year,setYear]=useState(currentYear);
-  const [userID , setUserID] = useState('')
+  const [userID , setUserID] = useState('');
+
+
   const encryptStorage = new EncryptStorage('secret-key', {
     prefix: '@instance1',
   });
   const encryptStorageTwo = new EncryptStorage('secret-key', {
     prefix: '@instance2',
   });
+
+
 const SetLocalLogin = async () => {
   try {
     let userToken = await encryptStorage.getItem('unique_key');
@@ -38,6 +41,8 @@ const SetLocalLogin = async () => {
     return null;
   }
 }
+
+
 const onChangeyear=(year)=>{
   setYear(year)
   if(year===""){
@@ -69,7 +74,7 @@ const expObj = {
   user_id:userID
 
 }
-axios.post(`${baseURL}api/fetchallvalues`,expObj,{
+axios.post(`${process.env.REACT_APP_BASE_URL}api/fetchallvalues`,expObj,{
   headers: {
     Authorization: `Bearer ${geToken}`
 
@@ -78,7 +83,7 @@ axios.post(`${baseURL}api/fetchallvalues`,expObj,{
   setAllDues(res.data.Dues);
 })
 .catch((error)=>{
-  console.log(error);
+  return error;
 })
 
 
@@ -91,7 +96,7 @@ const gettingMembersFee = (token,userID)=>{
     user_id:userID
 
   }
-  axios.post(`${baseURL}api/fetchallvalues`,dueObj, {
+  axios.post(`${process.env.REACT_APP_BASE_URL}api/fetchallvalues`,dueObj, {
     headers: {
       Authorization: `Bearer ${token}`,
   
@@ -101,13 +106,13 @@ const gettingMembersFee = (token,userID)=>{
     setAllDues(res.data.Fees);
   })
   .catch((error)=>{
-    console.log(error);
+    return error;
   })
 
 }
 
 const deleteDues = (id)=>{
-  axios.delete(`${baseURL}api/deletefees/${id}`, {
+  axios.delete(`${process.env.REACT_APP_BASE_URL}api/deletefees/${id}`, {
     headers: {
       Authorization: `Bearer ${geToken}`,
   
@@ -118,10 +123,9 @@ const deleteDues = (id)=>{
     setInterval(() => {
       window.location.reload(true)
     }, 1500);
-    console.log(res);
   })
   .catch((error)=>{
-    console.log(error);
+    return error
   })
 
 }

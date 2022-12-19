@@ -3,20 +3,24 @@ import "react-toastify/dist/ReactToastify.css";
 import React,{useState,useEffect} from 'react';
 import { toast } from "react-toastify";
 import {Link} from'react-router-dom';
-import baseURL from '../BaseUrl.js';
 import axios from 'axios';
 
 const MembersTable = () => {
+  
 const [getMembers , setMemRecord] = useState([]);
 const[contact , setContact] = useState('');
 const[geToken , seToken] = useState();
 const[date , setDate] = useState('');
+
+
+
 const encryptStorage = new EncryptStorage('secret-key', {
   prefix: '@instance1',
 });
 const encryptStorageTwo = new EncryptStorage('secret-key', {
   prefix: '@instance2',
 });
+
 
 const SetLocalLogin = async () => {
   try {
@@ -33,7 +37,7 @@ const SetLocalLogin = async () => {
 }
 
 const delMember = (id)=>{
-  axios.delete(`${baseURL}api/deletemember/${id}`,{
+  axios.delete(`${process.env.REACT_APP_BASE_URL}api/deletemember/${id}`,{
     headers: {
       Authorization: `Bearer ${geToken}`
   
@@ -43,10 +47,10 @@ const delMember = (id)=>{
     setInterval(() => {
       window.location.reload(true)
     }, 1500);
-    console.log(res)
+
   })
   .catch((error)=>{
-    console.log(error);
+    return error;
   })
 
 }
@@ -54,7 +58,7 @@ const delMember = (id)=>{
 
 const gettingMembers = (token,id)=>{
   
-  axios.get(`${baseURL}api/fetchByUserid/${id}`, {
+  axios.get(`${process.env.REACT_APP_BASE_URL}api/fetchByUserid/${id}`, {
     headers: {
       Authorization: `Bearer ${token}`,
   
@@ -62,10 +66,9 @@ const gettingMembers = (token,id)=>{
 })
   .then((res)=>{
     setMemRecord(res.data.members);
-    console.log(res.data)
   })
   .catch((error)=>{
-    console.log(error);
+    return error
   })
 
 }
@@ -275,7 +278,7 @@ useEffect(() => {
 
   return (
     <>
-     <div class="app-content content ">
+     <div className="app-content content ">
      <div className="content-wrapper container-xxl p-0">
      <div className="content-header row">
       <div className="content-header-left col-md-9 col-12 mb-2">

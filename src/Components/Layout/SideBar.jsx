@@ -6,7 +6,6 @@ import FeatherIcon from 'feather-icons-react';
 const SideBar = () => {
   return (
     <>
-
      <div className="main-menu menu-fixed menu-light menu-accordion menu-shadow" data-scroll-to-active="true">
     <div className="navbar-header">
       <ul className="nav navbar-nav flex-row">
@@ -87,6 +86,7 @@ const SideBar = () => {
 
   <div className="sidenav-overlay" />
   <div className="drag-target" />
+
 
     </>
   )

@@ -1,9 +1,8 @@
-import  "react-toastify/dist/ReactToastify.css";
-import {EncryptStorage} from 'encrypt-storage';
-import React,{useState,useEffect} from 'react';
+import HomeChooseProgram from '../../../WebImages/HomeChooseProgram.JPG';
 import {useLocation , Link} from 'react-router-dom';
-import baseURL from '../../../BaseUrl.js';
-import HomeChooseProgram from '../../../WebImages/HomeChooseProgram.JPG'
+import  "react-toastify/dist/ReactToastify.css";
+import React,{useState,useEffect} from 'react';
+import {EncryptStorage} from 'encrypt-storage';
 import { toast } from "react-toastify";
 import axios from 'axios';
 
@@ -114,14 +113,13 @@ const HomeChooseProgramSec = () => {
         progImgFour != null &&
         formdata.append("img_four", progImgFour);
       
-        axios.post(`${baseURL}api/updateprogram/${userID}`,formdata)
+        axios.post(`${process.env.REACT_APP_BASE_URL}api/updateprogram/${userID}`,formdata)
         .then((res)=>{
           setLoading(false)
           toast.info('Program Section Added')
-          console.log(res)
         })
         .catch((error)=>{
-          console.log(error)
+          return error
         })
           }
           else{

@@ -1,7 +1,6 @@
 import { EncryptStorage } from 'encrypt-storage';
 import React,{useState, useEffect} from 'react';
 import {Link} from 'react-router-dom';
-import baseURL from '../BaseUrl.js';
 import axios from 'axios';
 
 const ManageWebsiteSections = () => {
@@ -29,23 +28,23 @@ const SetLocalLogin = async () => {
 
 
 const gettingAboutPageData =  (id)=>{
-  axios.get(`${baseURL}api/aboutuslist/${id}`)
+  axios.get(`${process.env.REACT_APP_BASE_URL}api/aboutuslist/${id}`)
  .then((res)=>{
   setAboutPageData(res.data)
  })
  .catch((err)=>{
-   console.log(err)
+  return err
  })
 
 }
 
 const gettingGalleryPageData = (id)=>{
-  axios.get(`${baseURL}api/imageslist/${id}`)
+  axios.get(`${process.env.REACT_APP_BASE_URL}api/imageslist/${id}`)
   .then((res)=>{
     setGalleryPageData(res.data)
   })
   .catch((err)=>{
-    console.log(err)
+    return err
   })
  
 }

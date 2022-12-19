@@ -1,9 +1,8 @@
 import HomeHeader from '../../../WebImages/HomeHeader.JPG';
+import {useLocation , Link} from 'react-router-dom';
 import React,{useState,useEffect  } from 'react';
 import { EncryptStorage } from 'encrypt-storage';
 import "react-toastify/dist/ReactToastify.css";
-import {useLocation , Link} from 'react-router-dom';
-import baseURL from '../../../BaseUrl.js';
 import { toast } from "react-toastify";
 import axios from 'axios';
 
@@ -54,7 +53,7 @@ const SetLocalLogin = async () => {
     onwerImg !=null && 
     formdata.append("owner_img",onwerImg);
 
-    axios.post(`${baseURL}api/updatehome/${userID}`, formdata)
+    axios.post(`${process.env.REACT_APP_BASE_URL}api/updatehome/${userID}`, formdata)
     .then((res)=>{
       setLoading(false)
       toast.info('Section Added');

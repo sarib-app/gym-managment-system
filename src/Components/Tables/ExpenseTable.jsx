@@ -3,7 +3,6 @@ import "react-toastify/dist/ReactToastify.css";
 import React,{useState,useEffect} from 'react';
 import { toast } from "react-toastify";
 import{Link} from 'react-router-dom';
-import baseURL from '../BaseUrl.js';
 import axios from 'axios';
 
 
@@ -15,9 +14,11 @@ const[geToken , seToken] = useState('')
 const d = new Date();
 const Month = d.getMonth()+1;
 const currentYear = new Date().getFullYear();
-const [month,setMonth]=useState(Month)
-const [year,setYear]=useState(currentYear)
-const [userID,setUserId]=useState("")
+const [month,setMonth]=useState(Month);
+const [year,setYear]=useState(currentYear);
+const [userID,setUserId]=useState("");
+
+
 const encryptStorage = new EncryptStorage('secret-key', {
   prefix: '@instance1',
 });
@@ -81,7 +82,7 @@ const getDataAgain=(type)=>{
       user_id:userID
     
     }
-    axios.post(`${baseURL}api/fetchallvalues`,expObj,{
+    axios.post(`${process.env.REACT_APP_BASE_URL}api/fetchallvalues`,expObj,{
       headers: {
         Authorization: `Bearer ${geToken}`
     
@@ -90,7 +91,7 @@ const getDataAgain=(type)=>{
       setAllExpense(res.data.Dues);
     })
     .catch((error)=>{
-      console.log(error);
+      return error
     })
   
 
@@ -100,9 +101,6 @@ const getDataAgain=(type)=>{
 ///////////RENDERS ON USE EFFECT/////////////
 
 
-
-
-
 const gettingExpense = (token,userID)=>{
   const expObj = {
     month:month,
@@ -110,7 +108,7 @@ const gettingExpense = (token,userID)=>{
     user_id:userID
 
   }
-  axios.post(`${baseURL}api/fetchallvalues`,expObj,{
+  axios.post(`${process.env.REACT_APP_BASE_URL}api/fetchallvalues`,expObj,{
     headers: {
       Authorization: `Bearer ${token}`
   
@@ -120,7 +118,7 @@ const gettingExpense = (token,userID)=>{
     console.log(res.data)
   })
   .catch((error)=>{
-    console.log(error);
+    return error;
   })
 
 }
@@ -129,7 +127,7 @@ const gettingExpense = (token,userID)=>{
 
 const deleteExp = (id)=>{
   
-  axios.delete(`${baseURL}api/deletedues/${id}`,{
+  axios.delete(`${process.env.REACT_APP_BASE_URL}api/deletedues/${id}`,{
     headers: {
       Authorization: `Bearer ${geToken}`
   
@@ -139,10 +137,9 @@ const deleteExp = (id)=>{
     setInterval(() => {
       window.location.reload(true)
     }, 1500);
-    console.log(res)
   })
   .catch((error)=>{
-    console.log(error);
+    return error
   })
 
 }

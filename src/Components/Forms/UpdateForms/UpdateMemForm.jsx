@@ -2,7 +2,6 @@ import React, {useState, useEffect } from 'react';
 import { EncryptStorage } from 'encrypt-storage';
 import "react-toastify/dist/ReactToastify.css";
 import {useLocation} from 'react-router-dom';
-import baseURL from '../../BaseUrl.js';
 import {toast} from "react-toastify";
 import axios from 'axios';
 
@@ -83,7 +82,7 @@ const UpdateMemForm = () => {
     formdata.append("cnic_img", cincFile, "[PROXY]")
     
 
-    axios.post(`${baseURL}api/updatemember/${id}`, formdata, {
+    axios.post(`${process.env.REACT_APP_BASE_URL}api/updatemember/${id}`, formdata, {
       headers: {
         Authorization: 'Bearer ' + token,
 
@@ -108,7 +107,6 @@ const UpdateMemForm = () => {
 
           toast.warn("Please complete the information !");
           setLoading(false)
-          console.log(error)
    
       })
     }

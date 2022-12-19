@@ -1,10 +1,9 @@
 import {Chart as ChartJs, Tooltip, Title, ArcElement, Legend} from 'chart.js';
-import "react-toastify/dist/ReactToastify.css";
-import { toast } from "react-toastify";
 import { EncryptStorage } from 'encrypt-storage';
 import React,{useState, useEffect} from 'react';
+import "react-toastify/dist/ReactToastify.css";
+import { toast } from "react-toastify";
 import { Pie } from 'react-chartjs-2';
-import baseURL from '../BaseUrl.js';
 import axios from 'axios';
 
 ChartJs.register(
@@ -60,7 +59,7 @@ const gettingPrevData = ()=>{
       user_id:ID
   
     }
-    axios.post(`${baseURL}api/fetchallvalues`,allExpObj, {
+    axios.post(`${process.env.REACT_APP_BASE_URL}api/fetchallvalues`,allExpObj, {
       headers: {
         Authorization: `Bearer ${token}`
     
@@ -72,7 +71,7 @@ const gettingPrevData = ()=>{
       setAllExpense(res.data.Dues);
     })
     .catch((error)=>{
-      console.log(error);
+      return error
     })
   }
   else{
@@ -89,7 +88,7 @@ const gettingPrevData = ()=>{
       user_id:userID
   
     }
-    axios.post(`${baseURL}api/fetchallvalues`,allExpObj,{
+    axios.post(`${process.env.REACT_APP_BASE_URL}api/fetchallvalues`,allExpObj,{
       headers: {
         Authorization: `Bearer ${token}`,
     
@@ -99,7 +98,7 @@ const gettingPrevData = ()=>{
       setDuesAmount(res.data.Fees);
     })
     .catch((error)=>{
-      console.log(error);
+      return error
     })
   
   }
@@ -112,7 +111,7 @@ const gettingPrevData = ()=>{
   
     }
     
-    axios.post(`${baseURL}api/fetchallvalues`,allExpObj,{
+    axios.post(`${process.env.REACT_APP_BASE_URL}api/fetchallvalues`,allExpObj,{
       headers: {
         Authorization: `Bearer ${token}`,
     
@@ -122,7 +121,7 @@ const gettingPrevData = ()=>{
       setAllExpense(res.data.Dues);
     })
     .catch((error)=>{
-      console.log(error);
+      return error
     })
   
   
@@ -175,7 +174,6 @@ const gettingPrevData = ()=>{
   
     useEffect(() => {
       SetLocalLogin();
-      // gettingPrevData();
     }, [])
   return (
     <>
@@ -221,32 +219,30 @@ const gettingPrevData = ()=>{
                <section id="apexchart">
                    <div className="row">
                  {/* Line Chart Starts */}
-<div className="col-12">
- <div className="card">
-   <div className="
-     card-header
-     d-flex
-     flex-sm-row flex-column
-     justify-content-md-between
-     align-items-start
-     justify-content-start
-   ">
-     <div>
-       <h4 className="card-title mb-25">Revenue</h4>
-       {/* <span className="card-subtitle text-muted">Commercial networks &amp; enterprises</span> */}
-     </div>
-     
-   </div>
-   <div className="card-body d-block mx-auto revenue-card-body" >
-   <Pie  data={data}   />
+                        <div className="col-12">
+                        <div className="card">
+                          <div className="
+                            card-header
+                            d-flex
+                            flex-sm-row flex-column
+                            justify-content-md-between
+                            align-items-start
+                            justify-content-start
+                          ">
+                            <div>
+                              <h4 className="card-title mb-25">Revenue</h4>
+                              {/* <span className="card-subtitle text-muted">Commercial networks &amp; enterprises</span> */}
+                            </div>
+                            
+                          </div>
+                          <div className="card-body d-block mx-auto revenue-card-body" >
+                          <Pie  data={data}   />
 
-   {/* <Chart options={chart.options} series={chart.series} type="bar" width={500} height={520} /> */}
-   </div>
- </div>
-</div>
-{/* Line Chart Ends */}
-
-
+                          {/* <Chart options={chart.options} series={chart.series} type="bar" width={500} height={520} /> */}
+                          </div>
+                        </div>
+                        </div>
+                  {/* Line Chart Ends */}
                        </div>
                        </section>
            </div>

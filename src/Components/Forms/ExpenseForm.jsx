@@ -2,7 +2,6 @@ import { EncryptStorage } from 'encrypt-storage';
 import React,{useState , useEffect} from 'react';
 import "react-toastify/dist/ReactToastify.css";
 import { toast } from "react-toastify";
-import baseURL from '../BaseUrl.js';
 import axios from 'axios';
 
 toast.configure();
@@ -51,7 +50,7 @@ const ExpenseForm = () => {
       year:currentYear
     }  
 
-    axios.post(`${baseURL}api/adddues`,expenseObj,{
+    axios.post(`${process.env.REACT_APP_BASE_URL}api/adddues`,expenseObj,{
       headers: {
         Authorization: `Bearer ${tokenn}`,
     
@@ -71,7 +70,6 @@ const ExpenseForm = () => {
       toast.warn("Incomplete Information !");
       setLoading(false)
 
-      console.log(error)
     })
 
   

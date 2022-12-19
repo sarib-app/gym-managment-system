@@ -1,6 +1,5 @@
 import React,{useState, useEffect} from 'react';
 import { EncryptStorage } from 'encrypt-storage';
-import baseURL from '../../../BaseUrl.js';
 import {Link} from 'react-router-dom';
 import axios from 'axios';
 
@@ -31,33 +30,33 @@ const HomePageSections = () => {
     
 
     const gettingHeaderSectionData =  (id)=>{
-        axios.get(`${baseURL}api/homepagelist/${id}`)
+        axios.get(`${process.env.REACT_APP_BASE_URL}api/homepagelist/${id}`)
        .then((res)=>{
          setHeaderSectionData(res.data)
        })
        .catch((err)=>{
-         console.log(err)
+        return err
        })
      }
     
      const gettingChooseProgramData =  (id)=>{
-        axios.get(`${baseURL}api/programlist/${id}`)
+        axios.get(`${process.env.REACT_APP_BASE_URL}api/programlist/${id}`)
        .then((res)=>{
         setChooseProgramData(res.data)
        })
        .catch((err)=>{
-         console.log(err)
+        return err
        })
      }
 
 
      const gettingPricingData =  (id)=>{
-        axios.get(`${baseURL}api/pricinglist/${id}`)
+        axios.get(`${process.env.REACT_APP_BASE_URL}api/pricinglist/${id}`)
        .then((res)=>{
         setPricingData(res.data)
        })
        .catch((err)=>{
-         console.log(err)
+        return err
        })
      }
   

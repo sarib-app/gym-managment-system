@@ -2,7 +2,6 @@ import { EncryptStorage } from 'encrypt-storage';
 import React,{useState, useEffect} from 'react';
 import "react-toastify/dist/ReactToastify.css";
 import {useLocation} from 'react-router-dom';
-import baseURL from '../../BaseUrl.js';
 import {toast} from "react-toastify";
 import axios from 'axios';
 
@@ -61,7 +60,7 @@ const UpdateFeeSubmissionForm = () => {
             year:year,
       
           }
-          axios.post(`${baseURL}api/updatefees/${id}`,monthlyObj,{
+          axios.post(`${process.env.REACT_APP_BASE_URL}api/updatefees/${id}`,monthlyObj,{
             headers: {
               Authorization: 'Bearer ' + tokenn,
       
@@ -71,13 +70,11 @@ const UpdateFeeSubmissionForm = () => {
           .then((res)=>{
             setLoading(false)
             toast.info("Fee Updated!")
-            console.log(res)
           })
             
           .catch((error)=>{
             toast.warn("Incomplete Information !");
             setLoading(false)
-            console.log(error)
           })
 
      

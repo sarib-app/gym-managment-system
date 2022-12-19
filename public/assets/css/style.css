@@ -10,28 +10,13 @@ NOTE:
 PLACE HERE YOUR OWN SCSS CODES AND IF NEEDED, OVERRIDE THE STYLES FROM THE OTHER STYLESHEETS.
 WE WILL RELEASE FUTURE UPDATES SO IN ORDER TO NOT OVERWRITE YOUR STYLES IT'S BETTER LIKE THIS.  */
 
-.revenue-card-body{
-	width:50%;
+.ql-toolbar.ql-snow {
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    font-family: "Helvetica Neue", "Helvetica", "Arial", sans-serif;
+    padding: 8px;
 }
-@media only screen and (min-width: 320px) and (max-width: 479px){
-	.revenue-card-body{
-	  width:80%;
-	}
-  }
-  
-  @media only screen and (min-width: 480px) and (max-width: 768px){
-	.revenue-card-body{
-	  width:80%;
-	}
-  }
-  
-  @media  (min-width: 769px) and (max-width: 1024px){
-	.revenue-card-body{
-	  width:50%;
-	}
-  }
-  @media  (min-width: 1025px) and (max-width: 1200px){
-	.revenue-card-body{
-	  width:50%;
-	}
-  }
+.ql-snow .ql-formats {
+    display: inline-block;
+    vertical-align: middle;
+}

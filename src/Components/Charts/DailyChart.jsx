@@ -3,7 +3,6 @@ import React,{useState, useEffect} from 'react';
 import "react-toastify/dist/ReactToastify.css";
 import { toast } from "react-toastify";
 import Chart from 'react-apexcharts';
-import baseURL from '../BaseUrl.js';
 import axios from 'axios';
 
 
@@ -53,7 +52,7 @@ const gettingPrevData = ()=>{
     user_id:getUserID
 
   }
-  axios.post(`${baseURL}api/fetchallvalues`,allExpObj, {
+  axios.post(`${process.env.REACT_APP_BASE_URL}api/fetchallvalues`,allExpObj, {
     headers: {
       Authorization: `Bearer ${geToken}`
   
@@ -63,10 +62,9 @@ const gettingPrevData = ()=>{
     setIncome(res.data.Fees);
     setDuesAmount(res.data.Dues);
     setDisplay('expense')
-    console.log(res.data)
   })
   .catch((error)=>{
-    console.log(error);
+    return error
   })
 
   }
@@ -88,7 +86,7 @@ const gettingData = (userToken,userID)=>{
     user_id:userID
 
   }
-  axios.post(`${baseURL}api/fetchallvalues`,allExpObj, {
+  axios.post(`${process.env.REACT_APP_BASE_URL}api/fetchallvalues`,allExpObj, {
     headers: {
       Authorization: `Bearer ${userToken}`
   
@@ -100,7 +98,7 @@ const gettingData = (userToken,userID)=>{
     setDisplay('expense')
   })
   .catch((error)=>{
-    console.log(error);
+    return error
   })
 }
 
@@ -237,58 +235,56 @@ const gettingIncome = ()=>{
                 <section id="apexchart" >
                     <div className="row" >
                   {/* Line Chart Starts */}
-<div className="col-12" >
-  <div className="card" >
-    <div className="
-      card-header
-      d-flex
-      flex-sm-row flex-column
-      justify-content-md-between
-      align-items-start
-      justify-content-start
-    ">
-      <div>
-        <h4 className="card-title mb-25">Balance</h4>
-        {/* <span className="card-subtitle text-muted">Commercial networks &amp; enterprises</span> */}
-      </div>
-      <div className="d-flex align-items-center flex-wrap mt-sm-0 mt-1">
+              <div className="col-12" >
+                <div className="card" >
+                  <div className="
+                    card-header
+                    d-flex
+                    flex-sm-row flex-column
+                    justify-content-md-between
+                    align-items-start
+                    justify-content-start
+                  ">
+              <div>
+                <h4 className="card-title mb-25">Balance</h4>
+                {/* <span className="card-subtitle text-muted">Commercial networks &amp; enterprises</span> */}
+              </div>
+              <div className="d-flex align-items-center flex-wrap mt-sm-0 mt-1">
 
-        <button className="btn btn-outline-primary btn-sm me-1"  onClick={gettingExpense}>Expense</button>
-        <button className="btn btn-outline-info btn-sm me-1" onClick={gettingIncome}>Income</button>
+                <button className="btn btn-outline-primary btn-sm me-1"  onClick={gettingExpense}>Expense</button>
+                <button className="btn btn-outline-info btn-sm me-1" onClick={gettingIncome}>Income</button>
 
-        {/* <span className="badge badge-light-secondary">
-          <FeatherIcon className="text-danger font-small-3" icon="arrow-down" />
-          <span className="align-middle">20%</span>
-        </span> */}
-      </div>
-    </div>
-    <div className="card-body">
-
-      {
-        display === 'income'?
-        <Chart  
-        
-        height={260}
-        options={data.options} series={data.seriesA} type="bar"  />  :
-
-     <Chart 
-     height={260}
-
-     className="d-flex" options={dataTwo.options} series={dataTwo.seriesB} type="bar" />  
-      }
-
-      
-   
-    </div>
-  </div>
-</div>
-{/* Line Chart Ends */}
-
-
-                        </div>
-                        </section>
+                {/* <span className="badge badge-light-secondary">
+                  <FeatherIcon className="text-danger font-small-3" icon="arrow-down" />
+                  <span className="align-middle">20%</span>
+                </span> */}
+              </div>
             </div>
+              <div className="card-body">
 
+                {
+                  display === 'income'?
+                  <Chart  
+                  
+                  height={260}
+                  options={data.options} series={data.seriesA} type="bar"  />  :
+
+              <Chart 
+              height={260}
+
+              className="d-flex" options={dataTwo.options} series={dataTwo.seriesB} type="bar" />  
+                }
+
+                
+            
+              </div>
+            </div>
+          </div>
+          {/* Line Chart Ends */}
+
+            </div>
+            </section>
+            </div>
          </div>
          </div>
 

@@ -1,9 +1,7 @@
 import { EncryptStorage } from 'encrypt-storage';
 import React,{useState, useEffect} from 'react';
 import "react-toastify/dist/ReactToastify.css";
-import { AsyncStorage } from 'AsyncStorage';
 import { toast } from "react-toastify";
-import baseURL from '../BaseUrl.js';
 import axios from 'axios';
 
 
@@ -67,7 +65,7 @@ else{
      const userID = {
       user_id:getUserID
      }
-      axios.post(`${baseURL}api/fetchByPhone/${e.target.value}`,userID,{
+      axios.post(`${process.env.REACT_APP_BASE_URL}api/fetchByPhone/${e.target.value}`,userID,{
         headers: {
           Authorization: `Bearer ${tokenn}`,
       
@@ -89,7 +87,7 @@ else{
         
       })
       .catch((error)=>{
-        console.log(error)
+        return error;
       })
       
 
@@ -115,7 +113,7 @@ else{
       year:currentYear,
 
     }
-    axios.post(`${baseURL}api/addfees`,monthlyObj,{
+    axios.post(`${process.env.REACT_APP_BASE_URL}api/addfees`,monthlyObj,{
       headers: {
         Authorization: 'Bearer ' + tokenn,
 
@@ -126,15 +124,11 @@ else{
       if(res.data.result){
         setLoading(false)
       toast.info("Fees Submitted !")
-      // setInterval(() => {
-      //   window.location.reload(true)
-      // }, 1500)
       setPendingAmout('');
         setMemPhone('');
         setMemName('');
         setMemFee('');
         setAmout('');
-      console.log(res)
     }
     else{
       setLoading(false)
@@ -145,7 +139,6 @@ else{
     .catch((error)=>{
       toast.warn("Incomplete Information !");
       setLoading(false)
-      console.log(error)
     })
   }
 
@@ -199,7 +192,7 @@ else{
                     <input type="number" className="form-control time-mask" placeholder="Enter Amount" value={getAmount} onChange={(e)=>{setAmout(e.target.value)}} id="time" />
                     {
                       memFee?
-                      <span>Payable Amount: {memFee}</span>:null
+                      <span className="text-primary">Payable Amount: {memFee}</span>:null
                     }
                   </div>
 

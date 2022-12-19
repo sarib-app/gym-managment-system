@@ -2,7 +2,6 @@ import React, {useState, useEffect } from 'react';
 import { EncryptStorage } from 'encrypt-storage';
 import "react-toastify/dist/ReactToastify.css";
 import { toast } from "react-toastify";
-import baseURL from '../BaseUrl.js';
 import axios from 'axios';
 
 toast.configure();
@@ -72,7 +71,7 @@ const RegMemForm = () => {
     formdata.append("role_id", "1");
     formdata.append("cnic_img", cincFile, "[PROXY]")
 
-    axios.post(`${baseURL}api/addmember`, formdata, {
+    axios.post(`${process.env.REACT_APP_BASE_URL}api/addmember`, formdata, {
       headers: {
         Authorization: 'Bearer ' + token,
 
@@ -83,9 +82,6 @@ const RegMemForm = () => {
         if(res.data.result){
           setLoading(false)
           toast.info('Member Registered!')
-          // setInterval(() => {
-          //   window.location.reload(true)
-          // }, 1500);
           setInputs({
             memName:'',
             phoneNo:'',
@@ -104,10 +100,7 @@ const RegMemForm = () => {
         
       })
       .catch((error) => {
-       
-          toast.warn("Complete the Information !");
-          console.log(error)
-   
+          toast.warn("Complete the Information !");   
       })
     }
     else{
@@ -117,8 +110,22 @@ const RegMemForm = () => {
     }
     
   }
+
+  const reloadingPageOnce = ()=>{
+    var currentDocumentTimestamp = new Date(performance.timing.domLoading).getTime();
+    // Current Time //
+    var now = Date.now();
+    // Total Process Lenght as Minutes //
+    var tenSec = 10 * 1000;
+    // End Time of Process //
+    var plusTenSec = currentDocumentTimestamp + tenSec;
+    if (now > plusTenSec) {
+        window.location.reload();
+    }
+  }
   useEffect(() => {
     SetLocalLogin()
+    reloadingPageOnce()
   }, [])
   
   return (

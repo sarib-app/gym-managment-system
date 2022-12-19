@@ -5,7 +5,6 @@ import FeatherIcon from 'feather-icons-react';
 import { AsyncStorage } from 'AsyncStorage';
 import { toast } from "react-toastify";
 import React,{useState} from 'react';
-import baseURL from '../BaseUrl.js';
 import axios from 'axios';
 
 toast.configure();
@@ -39,13 +38,14 @@ const Login = () => {
     
   }
   
-  const SignIN = () => {
+  const SignIN = (e) => {
+    e.preventDefault()
     setLoading(true)
     const userObj = {
       email:inputs.Username,
       password:inputs.Password
     }
-    axios.post(`${baseURL}api/login`,userObj)
+    axios.post(`${process.env.REACT_APP_BASE_URL}api/login`,userObj)
     .then((res)=>{
       const encryptStorage = new EncryptStorage('secret-key', {
         prefix: '@instance1',
@@ -83,7 +83,7 @@ const Login = () => {
         Username:'',
         Password:''
       })
-      console.log(error)
+      return error;
     })
 
      
@@ -128,7 +128,7 @@ const Login = () => {
               </a>
               <h4 className="card-title mb-4 text-center">Welcome to Dashboard! 👋</h4>
               <p className="card-text mb-2">Please sign-in to your account and start the adventure</p>
-              <div className="auth-login-form mt-2">
+              <form className="auth-login-form mt-2" onSubmit={SignIN}>
                 <div className="mb-1">
                   <label htmlFor="login-email" className="form-label">Email</label>
                   <input type="text" className="form-control" id="login-email" name="Username" onChange={inputHandler} value={inputs.Username} placeholder="john@example.com" aria-describedby="login-email" tabIndex={1} autofocus />
@@ -151,12 +151,12 @@ const Login = () => {
                     <label className="form-check-label" htmlFor="remember-me"> Remember Me </label>
                   </div>
                 </div>
-                <button className="btn btn-info w-100" type="button" tabIndex={4} onClick={SignIN}>
+                <button className="btn btn-info w-100" type="submit" tabIndex={4}>
                   {
                   loading === true?"Loading...":"Sign in" 
                   }
                 </button>
-              </div>
+              </form>
               {/* <p className="text-center mt-2">
                 <span>New on our platform?</span>
                 <Link to="/Registration">&nbsp;&nbsp;&nbsp;&nbsp;

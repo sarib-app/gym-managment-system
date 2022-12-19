@@ -5,7 +5,6 @@ import React,{useState,useEffect} from 'react';
 import "react-toastify/dist/ReactToastify.css";
 import {useLocation , Link} from 'react-router-dom';
 import { toast } from "react-toastify";
-import baseURL from '../../../BaseUrl.js';
 import axios from 'axios';
 
 const AboutUsForm = () => {
@@ -22,13 +21,6 @@ const AboutUsForm = () => {
   const trainThreeImg = location.state.trainThreeImg;
   const trainFour = location.state.trainFour;
   const trainFourImg = location.state.trainFourImg;
-
-
-  
-  
-
-   
-
 
 
   const [userID , setUserID] = useState('');
@@ -112,13 +104,13 @@ const trainerSection = ()=>{
   trainerImgFour !==null &&
   formdata.append("trainer4_img",trainerImgFour);
   
-    axios.post(`${baseURL}api/updateaboutus/${userID}`,formdata)
+    axios.post(`${process.env.REACT_APP_BASE_URL}api/updateaboutus/${userID}`,formdata)
     .then((res)=>{
       setLoading(false)
       toast.info('About-Us Section Added')
     })
     .catch((err)=>{
-      console.log(err)
+      return err
     })
   }
   else{

@@ -4,7 +4,6 @@ import Arm from './Images/Recovery.png';
 import {Link} from 'react-router-dom';
 import { toast } from "react-toastify";
 import React,{useState} from 'react';
-import baseURL from '../BaseUrl.js';
 
 
 const Registeration = () => {
@@ -46,7 +45,7 @@ const Registeration = () => {
         redirect: 'follow'
       };
       
-      fetch(`${baseURL}api/register`, requestOptions)
+      fetch(`${process.env.REACT_APP_BASE_URL}api/register`, requestOptions)
         .then(response => response.json())
         .then(result => {
           if(result.user){
@@ -61,7 +60,9 @@ const Registeration = () => {
           }
         
         })
-        .catch(error => console.log('error', error));
+        .catch(error => {
+          return error
+        });
     }
 
 
